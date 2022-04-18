@@ -22,5 +22,5 @@ spec:
         app: web
     spec:
       containers:
-      - image: dnlloyd/basic-web-lighttpd:latest
+      - image: dnlloyd/basic-web-lighttpd:latest # {"$imagepolicy": "flux-system:basic-web-lighttpd"}
         name: web
