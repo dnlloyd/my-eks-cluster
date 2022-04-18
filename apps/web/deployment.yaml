@@ -11,7 +11,7 @@ metadata:
     app: web
   name: web
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: web
