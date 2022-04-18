@@ -1,0 +1,10 @@
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: basic-web-lighttpd
+  namespace: flux-system
+spec:
+  image: docker.io/dnlloyd/basic-web-lighttpd
+  interval: 1m0s
+
