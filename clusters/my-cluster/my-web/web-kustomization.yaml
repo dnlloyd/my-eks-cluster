@@ -4,6 +4,8 @@ kind: Kustomization
 metadata:
   name: my-web
   namespace: flux-system
+  annotations:
+    ann: yes-please
 spec:
   interval: 1m0s
   path: ./apps/web
