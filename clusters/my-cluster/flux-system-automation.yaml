@@ -21,6 +21,6 @@ spec:
     kind: GitRepository
     name: my-eks-cluster
   update:
-    path: ./clusters/my-cluster
+    path: ./clusters/my-cluster/my-web
     strategy: Setters
 
