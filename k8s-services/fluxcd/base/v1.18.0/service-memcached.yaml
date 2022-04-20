@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations: {}
+  creationTimestamp: null
+  name: memcached
+  namespace: flux
+spec:
+  ports:
+  - name: memcached
+    port: 11211
+    protocol: TCP
+    targetPort: 11211
+  selector:
+    name: memcached
+  sessionAffinity: None
+  type: ClusterIP

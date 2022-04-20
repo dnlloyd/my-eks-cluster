@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+#commonLabels:
+#  app.kubernetes.io/instance: "fluxcd"
+#  app.kubernetes.io/managed-by: "Kustomize"
+#  app.kubernetes.io/version: "v1.20.2"
+
+resources:
+- namespace.yaml
+- configmaps.yaml
+- service-memcached.yaml
+- rbac.yaml
+- deployment-flux.yaml
+- deployment-memcached.yaml

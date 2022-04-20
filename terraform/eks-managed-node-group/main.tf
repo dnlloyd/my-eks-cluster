@@ -3,27 +3,27 @@ provider "aws" {
 }
 
 provider "kubernetes" {
-  host                   = module.eks.cluster_endpoint
+  host = module.eks.cluster_endpoint
   cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
 
   exec {
     api_version = "client.authentication.k8s.io/v1alpha1"
-    command     = "aws"
+    command = "aws"
     # This requires the awscli to be installed locally where Terraform is executed
     args = ["eks", "get-token", "--cluster-name", module.eks.cluster_id]
   }
 }
 
 locals {
-  name            = "k8s-eks-lab-tf"
+  name = "eks-lab-tf-managed"
   cluster_version = "1.22"
-  region          = "us-east-1"
+  region = "us-east-1"
   vpc_id = "vpc-065b33a8baa73e2a3"
   subnet_ids = ["subnet-0799f4a5fa38ae5f7", "subnet-0e0a967b1d1553dcd"]
   ec2_key_pair_name = "fh-sandbox"
 
   tags = {
-    Example    = "eks_managed_node_group"
+    Example = "eks_managed_node_group"
     GithubRepo = "terraform-aws-eks"
     GithubOrg  = "terraform-aws-modules"
   }
@@ -36,7 +36,7 @@ data "aws_caller_identity" "current" {}
 ################################################################################
 
 module "eks" {
-  source = "git@github.com:terraform-aws-modules/terraform-aws-eks.git?"
+  source = "git@github.com:terraform-aws-modules/terraform-aws-eks.git?ref=v18.20.2"
 
   cluster_name                    = local.name
   cluster_version                 = local.cluster_version

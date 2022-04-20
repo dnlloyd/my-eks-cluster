@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+  - kustomize-controller.sa.yaml
+  - kustomize-controller.crds.yaml
+  - kustomize-controller.deployment.yaml
+  #- https://github.com/fluxcd/kustomize-controller/releases/download/v0.14.1/kustomize-controller.crds.yaml
+  #- https://github.com/fluxcd/kustomize-controller/releases/download/v0.14.1/kustomize-controller.deployment.yaml
+
+patchesJson6902:
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: kustomize-controller
+  path: ./patches/kustomize-controller-patch.yaml

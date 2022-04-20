@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: flux-system
+resources:
+  - namespace.yaml
+
+  # NetworkPolicies
+  - network-policies/allow-egress.yaml
+  - network-policies/allow-scraping.yaml
+  - network-policies/allow-webhooks.yaml
+
+  # controllers
+  - ../../../fluxcdv2-source-controller/base/v0.15.4/
+  - ../../../fluxcdv2-kustomize-controller/base/v0.14.1/
+  - ../../../fluxcdv2-notification-controller/base/v0.16.0/
+  - ../../../fluxcdv2-helm-controller/base/v0.11.2/
+  - ../../../fluxcdv2-image-reflector-controller/base/v0.11.1/
+  - ../../../fluxcdv2-image-automation-controller/base/v0.14.1/
+
+  - rbac.yaml
+
+transformers:
+  - labels.yaml

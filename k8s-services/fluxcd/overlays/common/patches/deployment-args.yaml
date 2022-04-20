@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flux
+  namespace: flux
+spec:
+  template:
+    spec:
+      containers:
+      - name: flux
+        args:
+        - --log-format=fmt
+        - --memcached-service=memcached
+        - --manifest-generation=true
+        - --ssh-keygen-dir=/var/fluxd/keygen
+        - --ssh-keygen-format=RFC4716
+        - --git-url=git@github.com:liskl/fhc-sandbox-terraform
+        - --git-branch=master
+        - --git-path=k8s-services/nginx-ingress-controller/overlays/fogops-liskl,k8s-services/cert-manager/overlays/dev,k8s-services/external-dns/overlays/dev,k8s-services/k8s-spot-termination-handler/overlays/common,k8s-services/cluster-autoscaler/overlays/common,k8s-services/kube-state-metrics/overlays/common,k8s-services/metrics-server/overlays/common,k8s-services/monitoring/overlays/common,k8s-services/registry/overlays/dev
+        - --git-label=flux
+        - --git-user=liskl
+        - --git-email=liskl@users.noreply.github.com
+        - --sops=true
+        - --listen-metrics=:3031
+        - --k8s-secret-name=flux-git-deploy
+        - --memcached-hostname=flux-memcached
+        - --sync-state=git
+        - --memcached-service=
+        - --git-readonly=false
+        - --git-verify-signatures=false
+        - --git-set-author=false
+        - --git-poll-interval=5m
+        - --git-timeout=20s
+        - --sync-interval=5m
+        - --git-ci-skip=false
+        - --automation-interval=5m
+        - --registry-rps=200
+        - --registry-burst=125
+        - --registry-trace=false
+        - --registry-exclude-image="quay.io/*","k8s.gcr.io/*","index.docker.io/*"
+
+# ,k8s-services/harbor/overlays/common
